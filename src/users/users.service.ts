@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { MongoRepository } from 'typeorm';
 import { Role } from '../enums/role';
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +23,14 @@ export class UsersService {
   }
 
   async findOne(id: string): Promise<User> {
-    const objectId = new ObjectId(id);
+    let objectId;
+    try {
+      objectId = new ObjectId(id);
+    } catch (error) {
+      throw new BadRequestException(
+        'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer',
+      );
+    }
     const user = await this.userRepository.findOne({
       where: { _id: objectId },
     });
@@ -41,7 +52,14 @@ export class UsersService {
   }
 
   async update(id: any, input: UpdateUserDto): Promise<User> {
-    const objectId = new ObjectId(id);
+    let objectId;
+    try {
+      objectId = new ObjectId(id);
+    } catch (error) {
+      throw new NotFoundException(
+        'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer',
+      );
+    }
     let user = await this.userRepository.findOne({
       where: { _id: objectId },
     });
@@ -52,13 +70,18 @@ export class UsersService {
   }
 
   async remove(id: any): Promise<User> {
-    const objectId = new ObjectId(id);
+    let objectId;
+    try {
+      objectId = new ObjectId(id);
+    } catch (error) {
+      throw new NotFoundException(
+        'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer',
+      );
+    }
     const user = await this.userRepository.findOne({
       where: { _id: objectId },
     });
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
+    if (!user) throw new NotFoundException('User not found');
     await this.userRepository.delete(objectId);
     return user;
   }

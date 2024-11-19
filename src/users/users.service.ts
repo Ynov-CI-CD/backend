@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -11,34 +12,43 @@ import { MongoRepository } from 'typeorm';
 import { Role } from '../enums/role';
 import { ObjectId } from 'mongodb';
 
+type ApiResponse<T> = {
+  status: 'success' | 'error';
+  data: T;
+};
+
 @Injectable()
 export class UsersService {
+  private readonly logger = new Logger(UsersService.name);
   constructor(
     @InjectRepository(User)
     private readonly userRepository: MongoRepository<User>,
   ) {}
 
-  async findAll(): Promise<User[]> {
-    return this.userRepository.find();
-  }
-
-  async findOne(id: string): Promise<User> {
-    let objectId;
+  private toObjectId(id: string): ObjectId {
     try {
-      objectId = new ObjectId(id);
+      return new ObjectId(id);
     } catch (error) {
+      this.logger.error(`Invalid id: ${id}`);
       throw new BadRequestException(
         'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer',
       );
     }
-    const user = await this.userRepository.findOne({
-      where: { _id: objectId },
-    });
-    if (!user) throw new NotFoundException('User not found');
-    return user;
   }
 
-  async create(input: CreateUserDto): Promise<User> {
+  private async findUserById(id: string): Promise<User> {
+    const objectId = this.toObjectId(id);
+    try {
+      return await this.userRepository.findOneOrFail({
+        where: { _id: objectId },
+      });
+    } catch (error) {
+      this.logger.error(`User with id ${id} not found`);
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+  }
+
+  private createUserEntity(input: CreateUserDto): User {
     const user = new User();
     user.email = input.email;
     user.password = input.password;
@@ -48,41 +58,51 @@ export class UsersService {
     user.birthDate = input.birthDate;
     user.city = input.city;
     user.zipCode = input.zipCode;
-    return this.userRepository.save(user);
-  }
-
-  async update(id: any, input: UpdateUserDto): Promise<User> {
-    let objectId;
-    try {
-      objectId = new ObjectId(id);
-    } catch (error) {
-      throw new NotFoundException(
-        'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer',
-      );
-    }
-    let user = await this.userRepository.findOne({
-      where: { _id: objectId },
-    });
-    if (!user) throw new NotFoundException('User not found');
-    delete input.id;
-    user = { ...user, ...input };
-    return this.userRepository.save(user);
-  }
-
-  async remove(id: any): Promise<User> {
-    let objectId;
-    try {
-      objectId = new ObjectId(id);
-    } catch (error) {
-      throw new NotFoundException(
-        'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer',
-      );
-    }
-    const user = await this.userRepository.findOne({
-      where: { _id: objectId },
-    });
-    if (!user) throw new NotFoundException('User not found');
-    await this.userRepository.delete(objectId);
     return user;
+  }
+
+  async findAll(): Promise<ApiResponse<{ users: User[] }>> {
+    this.logger.log('Fetching all users');
+    const users = await this.userRepository.find();
+    return { status: 'success', data: { users } };
+  }
+
+  async findOne(id: string): Promise<ApiResponse<{ user: User }>> {
+    this.logger.log(`Fetching user with id: ${id}`);
+    const user = await this.findUserById(id);
+    return { status: 'success', data: { user } };
+  }
+
+  async create(input: CreateUserDto): Promise<ApiResponse<{ user: User }>> {
+    const user = this.createUserEntity(input);
+    const createdUser = await this.userRepository.save(user);
+    this.logger.log(
+      `User with email ${input.email} has been created successfully.`,
+    );
+    return { status: 'success', data: { user: createdUser } };
+  }
+
+  async update(
+    id: string,
+    input: UpdateUserDto,
+  ): Promise<ApiResponse<{ user: User }>> {
+    const user = await this.findUserById(id);
+    const updatedUser = {
+      ...user,
+      ...input,
+      role: user.role,
+    };
+    const savedUser = await this.userRepository.save(updatedUser);
+    this.logger.log(
+      `User with email ${input.email} has been updated successfully.`,
+    );
+    return { status: 'success', data: { user: savedUser } };
+  }
+
+  async remove(id: string): Promise<ApiResponse<{ user: User }>> {
+    const deletedUser = await this.findUserById(id);
+    await this.userRepository.delete(deletedUser._id);
+    this.logger.log(`User with id: ${id} has been deleted successfully.`);
+    return { status: 'success', data: { user: deletedUser } };
   }
 }

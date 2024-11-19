@@ -4,5 +4,5 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({ description: "Identifiant unique de l'utilisateur" })
-  id: number;
+  id: string;
 }

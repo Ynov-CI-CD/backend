@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role } from '../../enums/role';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'john-doe@exemple.com', description: 'Email' })
@@ -7,9 +6,6 @@ export class CreateUserDto {
 
   @ApiProperty({ example: '123456', description: 'Password' })
   password: string;
-
-  @ApiProperty({ description: 'Role', enum: Role })
-  role: Role;
 
   @ApiProperty({ example: 'John', description: 'First Name' })
   firstName: string;

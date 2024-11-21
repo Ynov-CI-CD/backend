@@ -2,14 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { MongoRepository } from 'typeorm';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Role } from '../enums/role';
 import { ObjectId } from 'mongodb';
 
 describe('UsersService', () => {
   let service: UsersService;
-  let userRepository: MongoRepository<User>;
 
   const mockUserRepository = {
     findOneOrFail: jest.fn(),
@@ -42,7 +40,6 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    userRepository = module.get(getRepositoryToken(User));
   });
 
   describe('findAll', () => {

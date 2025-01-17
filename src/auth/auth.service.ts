@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,12 @@ export class AuthService {
     password: string,
   ): Promise<{ access_token: string }> {
     const user = await this.usersService.findUserByEmail(email);
-    if (!user || !(user.password === password)) {
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
@@ -42,9 +48,11 @@ export class AuthService {
     const existingUser = await this.usersService.findUserByEmail(email);
     if (existingUser) throw new ConflictException('Email already in use');
 
+    const hash = await bcrypt.hash(password, 10);
+
     const user = {
       email,
-      password,
+      password: hash,
       firstName,
       lastName,
       birthDate,
@@ -55,7 +63,7 @@ export class AuthService {
     return await this.usersService
       .create(user)
       .then(() => {
-        return this.signIn(email, password);
+        return this.signIn(email, hash);
       })
       .catch((error) => {
         if (error.code === 11000) {

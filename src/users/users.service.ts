@@ -48,6 +48,17 @@ export class UsersService {
     }
   }
 
+  async findUserByEmail(email: string): Promise<User> {
+    try {
+      return await this.userRepository.findOneOrFail({
+        where: { email },
+      });
+    } catch (error) {
+      this.logger.error(`User with email ${email} not found`);
+      return null;
+    }
+  }
+
   private createUserEntity(input: CreateUserDto): User {
     const user = new User();
     user.email = input.email;

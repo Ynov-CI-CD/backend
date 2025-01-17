@@ -12,6 +12,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Public } from '../decorators/public.decorator';
+import { Roles } from '../decorators/roles.decorator';
+import { RoleEnum } from '../enums/role.enum';
 
 @Controller('users')
 export class UsersController {
@@ -41,6 +43,7 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @Roles(RoleEnum.ADMIN)
   @ApiBearerAuth()
   @Delete(':id')
   remove(@Param('id') id: string) {

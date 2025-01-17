@@ -1,4 +1,4 @@
-import { Role } from '../../enums/role';
+import { RoleEnum } from '../../enums/role.enum';
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
 import { ObjectId } from 'mongodb';
 
@@ -14,7 +14,7 @@ export class User {
   email: string;
 
   @Column()
-  role: Role;
+  role: RoleEnum;
 
   @Column()
   firstName: string;

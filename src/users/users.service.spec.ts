@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { Role } from '../enums/role';
+import { RoleEnum } from '../enums/role.enum';
 import { ObjectId } from 'mongodb';
 
 describe('UsersService', () => {
@@ -20,7 +20,7 @@ describe('UsersService', () => {
     _id: new ObjectId(),
     email: 'test@example.com',
     password: 'password123',
-    role: Role.USER,
+    role: RoleEnum.USER,
     firstName: 'John',
     lastName: 'Doe',
     birthDate: new Date(),

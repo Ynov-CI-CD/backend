@@ -9,7 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { MongoRepository } from 'typeorm';
-import { Role } from '../enums/role';
+import { RoleEnum } from '../enums/role.enum';
 import { ObjectId } from 'mongodb';
 
 type ApiResponse<T> = {
@@ -63,7 +63,7 @@ export class UsersService {
     const user = new User();
     user.email = input.email;
     user.password = input.password;
-    user.role = Role.USER;
+    user.role = RoleEnum.USER;
     user.firstName = input.firstName;
     user.lastName = input.lastName;
     user.birthDate = input.birthDate;

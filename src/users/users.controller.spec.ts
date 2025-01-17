@@ -6,7 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
-import { Role } from '../enums/role';
+import { RoleEnum } from '../enums/role.enum';
 
 describe('UsersController', () => {
   let usersController: UsersController;
@@ -53,7 +53,7 @@ describe('UsersController', () => {
         birthDate: new Date('1990-01-01'),
         city: 'Paris',
         zipCode: '75001',
-        role: Role.USER,
+        role: RoleEnum.USER,
       };
 
       mockUsersService.create.mockResolvedValue({
@@ -80,7 +80,7 @@ describe('UsersController', () => {
           birthDate: new Date('1990-01-01'),
           city: 'Paris',
           zipCode: '75001',
-          role: Role.USER,
+          role: RoleEnum.USER,
         },
         {
           _id: new ObjectId(),
@@ -91,7 +91,7 @@ describe('UsersController', () => {
           birthDate: new Date('1992-02-02'),
           city: 'Lyon',
           zipCode: '69001',
-          role: Role.USER,
+          role: RoleEnum.USER,
         },
       ];
 
@@ -118,7 +118,7 @@ describe('UsersController', () => {
         birthDate: new Date('1990-01-01'),
         city: 'Paris',
         zipCode: '75001',
-        role: Role.USER,
+        role: RoleEnum.USER,
       };
 
       mockUsersService.findOne.mockResolvedValue({
@@ -166,7 +166,7 @@ describe('UsersController', () => {
         birthDate: new Date('1991-02-02'),
         city: 'Berlin',
         zipCode: '10115',
-        role: Role.ADMIN,
+        role: RoleEnum.ADMIN,
       };
 
       mockUsersService.update.mockResolvedValue({
@@ -221,7 +221,7 @@ describe('UsersController', () => {
         birthDate: new Date('1990-01-01'),
         city: 'Paris',
         zipCode: '75001',
-        role: Role.USER,
+        role: RoleEnum.USER,
       };
 
       mockUsersService.remove.mockResolvedValue({

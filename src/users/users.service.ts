@@ -72,31 +72,31 @@ export class UsersService {
     return user;
   }
 
-  async findAll(): Promise<ApiResponse<{ users: User[] }>> {
+  async findAll(): Promise<ApiResponse<User[]>> {
     this.logger.log('Fetching all users');
     const users = await this.userRepository.find();
-    return { status: 'success', data: { users } };
+    return { status: 'success', data: users };
   }
 
-  async findOne(id: string): Promise<ApiResponse<{ user: User }>> {
+  async findOne(id: string): Promise<ApiResponse<User>> {
     this.logger.log(`Fetching user with id: ${id}`);
     const user = await this.findUserById(id);
-    return { status: 'success', data: { user } };
+    return { status: 'success', data: user };
   }
 
-  async create(input: CreateUserDto): Promise<ApiResponse<{ user: User }>> {
+  async create(input: CreateUserDto): Promise<ApiResponse<User>> {
     const user = this.createUserEntity(input);
     const createdUser = await this.userRepository.save(user);
     this.logger.log(
       `User with email ${input.email} has been created successfully.`,
     );
-    return { status: 'success', data: { user: createdUser } };
+    return { status: 'success', data: createdUser };
   }
 
   async update(
     id: string,
     input: UpdateUserDto,
-  ): Promise<ApiResponse<{ user: User }>> {
+  ): Promise<ApiResponse<User>> {
     const user = await this.findUserById(id);
     const updatedUser = {
       ...user,
@@ -107,13 +107,13 @@ export class UsersService {
     this.logger.log(
       `User with email ${input.email} has been updated successfully.`,
     );
-    return { status: 'success', data: { user: savedUser } };
+    return { status: 'success', data: savedUser };
   }
 
-  async remove(id: string): Promise<ApiResponse<{ user: User }>> {
+  async remove(id: string): Promise<ApiResponse<User>> {
     const deletedUser = await this.findUserById(id);
     await this.userRepository.delete(deletedUser._id);
     this.logger.log(`User with id: ${id} has been deleted successfully.`);
-    return { status: 'success', data: { user: deletedUser } };
+    return { status: 'success', data: deletedUser };
   }
 }

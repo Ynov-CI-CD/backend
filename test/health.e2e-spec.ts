@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('HealthController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -19,14 +19,10 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 
-  it('/ (GET)', () => {
+  it('/health (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(401)
-      .expect((res) => {
-        expect(res.body.message).toBe('No token provided');
-        expect(res.body.statusCode).toBe(401);
-        expect(res.body.error).toBe('Unauthorized');
-      });
+      .get('/health')
+      .expect(200)
+      .expect('Service is healthy');
   });
 });

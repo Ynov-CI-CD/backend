@@ -58,12 +58,12 @@ describe('UsersController', () => {
 
       mockUsersService.create.mockResolvedValue({
         status: 'success',
-        data: { user },
+        data: user,
       });
 
       const result = await usersController.create(createUserDto);
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(user);
+      expect(result.data).toEqual(user);
       expect(mockUsersService.create).toHaveBeenCalledWith(createUserDto);
     });
   });
@@ -97,12 +97,12 @@ describe('UsersController', () => {
 
       mockUsersService.findAll.mockResolvedValue({
         status: 'success',
-        data: { users },
+        data: users,
       });
 
       const result = await usersController.findAll();
       expect(result.status).toBe('success');
-      expect(result.data.users).toEqual(users);
+      expect(result.data).toEqual(users);
       expect(mockUsersService.findAll).toHaveBeenCalled();
     });
   });
@@ -123,12 +123,12 @@ describe('UsersController', () => {
 
       mockUsersService.findOne.mockResolvedValue({
         status: 'success',
-        data: { user },
+        data: user,
       });
 
       const result = await usersController.findOne('507f191e810c19729de860ea');
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(user);
+      expect(result.data).toEqual(user);
       expect(mockUsersService.findOne).toHaveBeenCalledWith(
         '507f191e810c19729de860ea',
       );
@@ -171,7 +171,7 @@ describe('UsersController', () => {
 
       mockUsersService.update.mockResolvedValue({
         status: 'success',
-        data: { user },
+        data: user,
       });
 
       const result = await usersController.update(
@@ -179,7 +179,7 @@ describe('UsersController', () => {
         updateUserDto,
       );
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(user);
+      expect(result.data).toEqual(user);
       expect(mockUsersService.update).toHaveBeenCalledWith(
         '507f191e810c19729de860ea',
         updateUserDto,
@@ -226,12 +226,12 @@ describe('UsersController', () => {
 
       mockUsersService.remove.mockResolvedValue({
         status: 'success',
-        data: { user },
+        data: user,
       });
 
       const result = await usersController.remove('507f191e810c19729de860ea');
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(user);
+      expect(result.data).toEqual(user);
       expect(mockUsersService.remove).toHaveBeenCalledWith(
         '507f191e810c19729de860ea',
       );

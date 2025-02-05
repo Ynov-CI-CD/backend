@@ -39,7 +39,6 @@ export class AuthController {
     );
   }
 
-  // @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Get('profile')
   getProfile(@Request() request) {

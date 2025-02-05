@@ -48,10 +48,8 @@ export class AuthGuard implements CanActivate {
     }
     const [type, token] = authHeader.split(' ');
     if (type !== 'Bearer' || !token) {
-      console.log('Authorization header is not in the correct format');
       return undefined;
     }
     return token;
   }
-
 }

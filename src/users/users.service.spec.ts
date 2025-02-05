@@ -49,8 +49,8 @@ describe('UsersService', () => {
       const result = await service.findAll();
 
       expect(result.status).toBe('success');
-      expect(result.data.users).toHaveLength(1);
-      expect(result.data.users[0]).toEqual(mockUser);
+      expect(result.data).toHaveLength(1);
+      expect(result.data[0]).toEqual(mockUser);
     });
   });
 
@@ -61,7 +61,7 @@ describe('UsersService', () => {
       const result = await service.findOne(mockUser._id.toHexString());
 
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(mockUser);
+      expect(result.data).toEqual(mockUser);
     });
 
     it('should throw NotFoundException if user is not found', async () => {
@@ -70,6 +70,24 @@ describe('UsersService', () => {
       await expect(service.findOne(mockUser._id.toHexString())).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+
+  describe('findUserByEmail', () => {
+    it('should return a user by email', async () => {
+      mockUserRepository.findOneOrFail.mockResolvedValue(mockUser);
+
+      const result = await service.findUserByEmail(mockUser.email);
+
+      expect(result).toEqual(mockUser);
+    });
+
+    it('should return null if user is not found', async () => {
+      mockUserRepository.findOneOrFail.mockRejectedValue(new Error());
+
+      const result = await service.findUserByEmail(mockUser.email);
+
+      expect(result).toBeNull();
     });
   });
 
@@ -88,7 +106,7 @@ describe('UsersService', () => {
       });
 
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(mockUser);
+      expect(result.data).toEqual(mockUser);
     });
   });
 
@@ -106,7 +124,7 @@ describe('UsersService', () => {
       });
 
       expect(result.status).toBe('success');
-      expect(result.data.user.firstName).toBe('UpdatedFirstName');
+      expect(result.data.firstName).toBe('UpdatedFirstName');
     });
 
     it('should throw NotFoundException if user is not found for update', async () => {
@@ -129,7 +147,7 @@ describe('UsersService', () => {
       const result = await service.remove(mockUser._id.toHexString());
 
       expect(result.status).toBe('success');
-      expect(result.data.user).toEqual(mockUser);
+      expect(result.data).toEqual(mockUser);
     });
 
     it('should throw NotFoundException if user is not found for deletion', async () => {

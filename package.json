@@ -66,6 +66,14 @@
     ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
+    "testPathIgnorePatterns": [
+      "\\.module\\.ts$",
+      "main.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "\\.module\\.ts$",
+      "main.ts"
+    ],
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },

@@ -6,8 +6,8 @@ import { UsersService } from '../src/users/users.service';
 import { AuthService } from '../src/auth/auth.service';
 import { AuthGuard } from '../src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
-import { RolesGuard } from '../src/roles.guard';
 import { RoleEnum } from '../src/enums/role.enum';
+import { RolesGuard } from '../src/auth/roles.guard';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;

@@ -63,7 +63,7 @@ export class AuthService {
     return await this.usersService
       .create(user)
       .then(() => {
-        return this.signIn(email, hash);
+        return this.signIn(email, password);
       })
       .catch((error) => {
         if (error.code === 11000) {

@@ -93,10 +93,7 @@ export class UsersService {
     return { status: 'success', data: createdUser };
   }
 
-  async update(
-    id: string,
-    input: UpdateUserDto,
-  ): Promise<ApiResponse<User>> {
+  async update(id: string, input: UpdateUserDto): Promise<ApiResponse<User>> {
     const user = await this.findUserById(id);
     const updatedUser = {
       ...user,

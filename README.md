@@ -1,73 +1,58 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Group Project - Integration and Deployment
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a YNOV School project aiming to test, build, and deploy a project, helping students to understand how it works in a real deployment chain from development to deployment.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# References
+- [Important Links](#important-links)
+- [Project Documentation](#project-documentation)
+- [Project Structure](#project-structure)
+- [Key Features](#key-features)
+- [Project Evaluation](#project-evaluation)
 
-## Description
+## Important Links:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Webapp (Github Pages): [Click Here](https://ynov-ci-cd.github.io/Frontend/)
+- Auto-Generated Documentation (Webapp): [Click Here](https://ynov-ci-cd.github.io/Frontend/docs/)
+- Codecov: [Click Here](https://app.codecov.io/gh/Ynov-CI-CD/Frontend)
+- NPM Package: [Click Here](https://www.npmjs.com/package/integration-deploiement-personal-front)
+- Github Repository Frontend: [Click Here](https://github.com/Ynov-CI-CD/Frontend)
+- Github Repository Backend: [Click Here](https://github.com/Ynov-CI-CD/Backend)
 
-## Installation
+## Project Documentation
 
-```bash
-$ npm install
-```
+- Docker Architecture: [Click Here](docs/architecture_docker.md)
+- Global Testing: [Click Here](docs/testing.md)
+- Deployment: [Click Here](docs/deployment.md)
 
-## Running the app
+## Project Structure
 
-```bash
-# development
-$ npm run start
+The project is structured into two main repositories: the backend (NestJS) and the frontend (Angular). Both parts are organized into separate directories:
 
-# watch mode
-$ npm run start:dev
+- `back`: Contains the backend code, including NestJS configuration, TypeScript source files, and test files.
+- `front`: Contains the frontend code, including Angular configuration, TypeScript source files, and test files.
 
-# production mode
-$ npm run start:prod
-```
+## Key Features
 
-## Test
+- Backend:
+    - Built with NestJS, a progressive Node.js framework.
+    - Uses TypeScript for type-safe development.
+    - Implements a RESTful API for user management.
+    - Includes unit tests, integration and end-to-end tests using Jest and supertest.
 
-```bash
-# unit tests
-$ npm run test
+- Frontend:
+    - Built with Angular, a popular TypeScript-based framework.
+    - Uses Angular CLI for project setup and development.
+    - Implements a user interface for managing users.
+    - Includes unit tests, integration and end-to-end tests using Angular's testing framework.
 
-# e2e tests
-$ npm run test:e2e
+## Project Evaluation
 
-# test coverage
-$ npm run test:cov
-```
+- Achieved nearly 100% code coverage through Unit Tests to validate the mechanics of specific features.
+- Completed nearly 100% Integration Test coverage to ensure end-to-end functionality, including template changes and interactions.
+- Automated the generation of functional documentation, a structured README, and coverage reports deployed to Codecov.
+- Implemented a workflow encompassing testing, global deployment, and GitHub Pages integration.
 
-## Support
+**Bonus:**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- The UI/UX of our Angular application is designed to be visually appealing and user-friendly.
+- The code is properly implemented and optimized on both the backend and frontend, ensuring smooth functionality across the entire application.

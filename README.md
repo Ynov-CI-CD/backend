@@ -13,10 +13,13 @@ This is a YNOV School project aiming to test, build, and deploy a project, helpi
 
 - Webapp (Github Pages): [Click Here](https://ynov-ci-cd.github.io/Frontend/)
 - Auto-Generated Documentation (Webapp): [Click Here](https://ynov-ci-cd.github.io/Frontend/docs/)
+- Swagger: [Click Here](https://backend.integration-deploiement.strackzdev.com/api)
 - Codecov: [Click Here](https://app.codecov.io/gh/Ynov-CI-CD/Frontend)
 - NPM Package: [Click Here](https://www.npmjs.com/package/integration-deploiement-personal-front)
 - Github Repository Frontend: [Click Here](https://github.com/Ynov-CI-CD/Frontend)
 - Github Repository Backend: [Click Here](https://github.com/Ynov-CI-CD/Backend)
+
+**Note:** In the important links section, we mentioned the web app deployment on GitHub Pages, but we also have the deployment on Coolify: [Webapp](https://integration-deploiement.strackzdev.com/) & [Backend](https://backend.integration-deploiement.strackzdev.com).
 
 ## Project Documentation
 

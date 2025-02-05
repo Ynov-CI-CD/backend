@@ -1,6 +1,13 @@
 # Deployment
 
 # References
+- [Cloud](#cloud)
+  - [Our deployment](#our-deployment)
+  - [Environment Variables](#environment-variables)
+- [Auto-deployment Strategy](#auto-deployment-strategy)
+  - [Github webhook](#github-webhook)
+  - [Coolify webhook](#coolify-webhook)
+  - [Successful deployment](#successful-deployment)
 - [Version Strategy](#version-strategy)
 
 ## Cloud

@@ -19,7 +19,9 @@ Both Angular test types use Karma, the only difference lies in their implementat
 
 We implemented Cypress for end-to-end (E2E) testing in our Angular application, ensuring reliable and automated validation of user interactions and application behavior.
 
-![Image placeholder]()
+Note: The screenshot in this case is taken directly from the tests in GitHub Actions, allowing us to confirm that the E2E tests are functioning properly within the pipeline.
+
+![Image placeholder](img/front_cypress_tests.png)
 
 ## Backend Unit/Integration tests
 
@@ -31,7 +33,7 @@ We implemented Jest for unit and integration testing in our NestJS application, 
 
 We used Supertest with Jest for end-to-end (E2E) testing in our NestJS backend, ensuring robust and reliable API validation.
 
-![Image placeholder]()
+![Image placeholder](img/back_e2e_tests.png)
 
 ## Codecov
 

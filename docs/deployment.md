@@ -27,6 +27,8 @@ We have our customised environment variables in our server deployment config as 
 ## Auto-deployment Strategy
 In our GitFlow workflow, we protect the branches to ensure that developers merge from the feature branch into the develop branch (which is both protected and set as default). Once the pipeline in the feature branch succeeds, the code is rebased into develop, triggering a push event via a webhook. This webhook then redeploys the affected service.
 
+We didn't implement the triggers in the repository because Coolify already automates the process. It manages auto-deployment for the project, handling orders and priorities. Implementing fire triggers would have caused conflicts due to simultaneous deployments.
+
 ### **Github webhook:**
 ![Image placeholder](img/webhook_github.png)
 
@@ -40,6 +42,6 @@ In our GitFlow workflow, we protect the branches to ensure that developers merge
 
 **The version will be managed manually by the developer.**
 
-In this project example, I decided to update the NPM repository only when the developer makes changes to the `package.json` version (not all file).
+In this project example, we decided to update the NPM repository only when the developer makes changes to the `package.json` version (not all file).
 
 **Disclaimer:** During our classes, some students used the Auto-commit versions strategy, which often struggles with major version updates. This approach can also lead to issues such as developers not wanting to increment the version with every code push or conflicts arising from multiple merge requests with differing versions. I opted for this approach because it eliminates many headaches and potential problems.

@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "1234",
+    "firstName": "BBBBB",
+    "lastName": "AAA",
+    "email": "aaa.aaa@aaa.com",
+    "password": "aaaa",
+    "birthDate": "1988-01-01",
+    "city": "Montpellier",
+    "zipCode": "00000",
+    "role": "admin"
+  }
+]

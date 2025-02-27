@@ -29,6 +29,8 @@ In our GitFlow workflow, we protect the branches to ensure that developers merge
 
 We didn't implement the triggers in the repository because Coolify already automates the process. It manages auto-deployment for the project, handling orders and priorities. Implementing fire triggers would have caused conflicts due to simultaneous deployments.
 
+A second webhook was created to trigger the front-end pipeline when the back-end executes.
+
 ### **Github webhook:**
 ![Image placeholder](img/webhook_github.png)
 

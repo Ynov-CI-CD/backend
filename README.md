@@ -27,6 +27,29 @@ This is a YNOV School project aiming to test, build, and deploy a project, helpi
 - Global Testing: [Click Here](docs/testing.md)
 - Deployment: [Click Here](docs/deployment.md)
 
+## Task Distribution
+
+### José
+- Front-end development
+- Unit and integration testing (front-end)
+- GitLab CI/CD setup
+- Management and deployment with Coolify
+- General documentation
+- Front-end documentation generation (TSDoc, etc.)
+- Creating Dockerfiles
+- Setting up Docker Compose
+- Codecov integration
+- Publishing the front-end on NPM
+
+### Timothée
+- Back-end development
+- Unit and integration testing (back-end)
+- End-to-end (E2E) testing (front-end/back-end)
+- General documentation
+- API documentation and management with OpenAPI
+- Creating Dockerfiles
+- Setting up Docker Compose
+
 ## Project Structure
 
 The project is structured into two main repositories: the backend (NestJS) and the frontend (Angular). Both parts are organized into separate directories:
